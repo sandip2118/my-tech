@@ -25,7 +25,8 @@ import { addDays } from 'date-fns';
 
 const initialData = [
   {
-    "id": '1',
+    "id": 1,
+    "key": 1,
     "name": "Handmade Pouch",
     "varient": 3,
     "sku": "300182",
@@ -36,7 +37,8 @@ const initialData = [
     "added": "20 Dec 2022"
   },
   {
-    "id": '2',
+    "id": 2,
+    "key": 2,
     "name": "Smartwatch K2",
     "varient": 2,
     "sku": "300181",
@@ -47,7 +49,8 @@ const initialData = [
     "added": "24 Dec 2022"
   },
   {
-    "id": '3',
+    "id": 3,
+    "key": 3,
     "name": "Smartwatch E1",
     "varient": 3,
     "sku": "300180",
@@ -58,7 +61,8 @@ const initialData = [
     "added": "23 Dec 2022"
   },
   {
-    "id": '4',
+    "id": 4,
+    "key": 4,
     "name": "Headphone G1 Pro",
     "varient": 4,
     "sku": "300182",
@@ -69,7 +73,8 @@ const initialData = [
     "added": "21 Dec 2022"
   },
   {
-    "id": '5',
+    "id": 5,
+    "key": 5,
     "name": "Ubron X",
     "varient": 2,
     "sku": "300160",
@@ -80,7 +85,8 @@ const initialData = [
     "added": "21 Dec 2022"
   },
   {
-    "id": '6',
+    "id": 6,
+    "key": 6,
     "name": "Puma Shoes",
     "varient": 1,
     "sku": "300165",
@@ -91,7 +97,8 @@ const initialData = [
     "added": "10 Dec 2022"
   },
   {
-    "id": '7',
+    "id": 7,
+    "key": 7,
     "name": "Logie Wireless Mouse",
     "varient": 3,
     "sku": "284643",
@@ -102,7 +109,8 @@ const initialData = [
     "added": "12 Nov 2022"
   },
   {
-    "id": '8',
+    "id": 8,
+    "key": 8,
     "name": "Nike Shoes",
     "varient": 3,
     "sku": "300185",
@@ -113,7 +121,8 @@ const initialData = [
     "added": "20 Nov 2022"
   },
   {
-    "id": '9',
+    "id": 9,
+    "key": 9,
     "name": "Large Car",
     "varient": 3,
     "sku": "300105",
@@ -124,7 +133,8 @@ const initialData = [
     "added": "18 Aug 2022"
   },
   {
-    "id": '10',
+    "id": 10,
+    "key": 10,
     "name": "PS Wireless Controller",
     "varient": 3,
     "sku": "300186",
@@ -264,9 +274,13 @@ export default function Product() {
   };
 
   const toggleColumnVisibility = (id) => {
-    setHiddenColumns((prev) =>
-      prev.includes(id) ? prev.filter((k) => k !== id) : [...prev, id]
-    );
+    setHiddenColumns((prev) => {
+      if (prev.includes(id)) {
+        return prev.filter((colId) => colId !== id);
+      } else {
+        return [...prev, id];
+      }
+    });
   };
 
   const getColumnSearchProps = (dataIndex) => ({
@@ -469,8 +483,8 @@ export default function Product() {
         .map((col , i) => (
           <Menu.Item key={i} id={col.id}>
             <Checkbox
-              checked={!hiddenColumns.includes(col.id)}
-              onChange={() => toggleColumnVisibility(col.id)}
+              checked={!hiddenColumns.includes(col.key)}
+              onChange={() => toggleColumnVisibility(col.key)}
             >
               {col.title}
             </Checkbox>
